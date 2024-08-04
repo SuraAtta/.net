@@ -5,23 +5,23 @@ using TestApp.Models;
 namespace TestApp.Controllers
 {
     [ApiController]
-    [Route("/book")]
+    [Route("/api")]
     public class BookController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("GetAllBooks")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<Book> GetBooks()
         {
             return BooksStore.books;
         }
-        [HttpGet("id", Name = "GetBook")]
+        [HttpGet("GetBook", Name = "GetBook")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
         public ActionResult<Book> GetBook(int id) => BooksStore.books.FirstOrDefault(u => u.Id == id);
 
-        [HttpPost]
+        [HttpPost("AddBook")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -47,7 +47,7 @@ namespace TestApp.Controllers
         }
 
 
-        [HttpDelete("id", Name = "DeleteBook")]
+        [HttpDelete("DeleteBook", Name = "DeleteBook")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -66,7 +66,7 @@ namespace TestApp.Controllers
             return NoContent();
         }
 
-        [HttpPut("id", Name = "UpdateBook")]
+        [HttpPut("UpdateBook", Name = "UpdateBook")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult UpdateBook(int id, [FromBody] Book book)
